@@ -1,0 +1,7 @@
+{
+    "project_name": "ML Project Name",
+    "repo_name": "{{ cookiecutter.project_name.lower().replace(' ', '_') }}",
+    "author_name": "Matt Goldberg",
+    "description": "A short description of the project.",
+    "python_interpreter": ["python", "python3"]
+}
