@@ -22,9 +22,6 @@ feature functions in feature_functions.py (see that file for more)
 DEFINED AUTOMATICALLY:
 ----------------------
 
-get_config()
-    reads in config file, returns a dictionary of configs to be passed around
-
 get_training_data(config)
     gets training keys, gets features for those keys, gets targets for those keys, returns dataframe
 
@@ -68,20 +65,10 @@ def get_target(config, key):
     pass
 
 
-def get_config():
-    config = toml.load('config.toml')
-    return config['make_dataset']
-
-
 def get_feature_vector(key, feature_functions):
     # TODO: parallelize calling each feature_function on the key
-    feature_dicts = [
-        feature_function(key) for feature_function in feature_functions
-    ]
-    all_features_dict = {
-        k: v
-        for feat_dict in feature_dicts for k, v in feat_dict.items()
-    }
+    feature_dicts = [feature_function(key) for feature_function in feature_functions]
+    all_features_dict = {k: v for feat_dict in feature_dicts for k, v in feat_dict.items()}
     return all_features_dict
 
 
@@ -90,9 +77,7 @@ def get_training_data(config):
     feature_functions = features.get_feature_functions(config)
     # TODO: parallelize get_feature_vector and get_target over keys
     # TODO: make sure this gives the proper orientation (columns as columns, not index)
-    train_features = [
-        get_feature_vector(key, feature_functions) for key in train_keys
-    ]
+    train_features = [get_feature_vector(key, feature_functions) for key in train_keys]
     train_target = [get_target(config, key) for key in train_keys]
     return pd.DataFrame(train_features), pd.Series(train_target)
 
@@ -102,16 +87,14 @@ def get_output_data(config):
     feature_functions = features.get_feature_functions(config)
     # TODO: parallelize get_feature_vector over keys
     # TODO: make sure this gives the proper orientation (columns as columns, not index)
-    output_features = [
-        get_feature_vector(key, feature_functions) for key in output_keys
-    ]
+    output_features = [get_feature_vector(key, feature_functions) for key in output_keys]
     return pd.DataFrame(output_features)
 
 
 @click.command()
 # TODO: flags for only regenerating training/output data
 def main():
-    config = get_config()
+    config = toml.load('config.toml').get('dataset', {})
     train_X, train_y = get_training_data(config)
     output_X = get_output_data(config)
     # TODO: finish this, write to disk based on config

@@ -1,14 +1,14 @@
 # NOTE: all paths are relative to the root project directory
 
-[make_dataset]
+[dataset]
 training_features_filepath = 'data/training_features.csv'
 training_target_filepath = 'data/training_target.csv'
 output_features_filepath = 'data/output_features.csv'
 # TODO: add more configs here
 
-[model_training]
+[models]
 # TODO: add configs, for example:
 # regression vs classification
 # number of cv folds to use
 # which metric to use to evaluate
-# models can be sub-dictionaries with hyperparameters
+# models can be sub-dictionaries with hyperparameters?
