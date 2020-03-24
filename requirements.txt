@@ -11,7 +11,7 @@ backports.ssl-match-hostname==3.5.0.1
 backports.weakref==1.0.post1
 beautifulsoup4==4.6.0
 binaryornot==0.4.4
-bleach==2.1.1
+bleach==3.1.2
 boltons==17.1.0
 boto==2.48.0
 bz2file==0.98
