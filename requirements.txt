@@ -22,7 +22,7 @@ clint==0.5.1
 cloudpickle==0.4.0
 CommonMark==0.5.4
 configparser==3.5.0
-cookiecutter==1.5.1
+cookiecutter==2.1.1
 cssselect==1.0.1
 cycler==0.10.0
 Cython==0.27.1
